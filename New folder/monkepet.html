@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MonkePet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        #petImage {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to MonkePet!</h1>
+        <div id="game">
+            <label for="petName">Enter your pet's name: </label>
+            <input type="text" id="petName" value="MonkePet">
+            <button class="button" onclick="startGame()">Start Game</button>
+        </div>
+        <div id="menu" style="display:none;">
+            <h2 id="petHeader"></h2>
+            <img id="petImage" src="monkepet.png" alt="MonkePet" width="150">
+            <p>Hunger Level: <span id="hungerLevel">5</span> (0=Full, 10=Very Hungry)</p>
+            <p>Happiness Level: <span id="happinessLevel">5</span> (0=Sad, 10=Very Happy)</p>
+            <button class="button" onclick="checkStatus()">Check Status</button>
+            <button class="button" onclick="feedPet()">Feed Pet</button>
+            <button class="button" onclick="playPet()">Play with Pet</button>
+            <button class="button" onclick="exitGame()">Exit</button>
+        </div>
+    </div>
+
+    <script>
+        let petName = "MonkePet";
+        let petHunger = 5;
+        let petHappiness = 5;
+
+        function startGame() {
+            petName = document.getElementById('petName').value;
+            document.getElementById('petHeader').innerText = `Pet Name: ${petName}`;
+            document.getElementById('game').style.display = 'none';
+            document.getElementById('menu').style.display = 'block';
+        }
+
+        function checkStatus() {
+            alert(`Pet Name: ${petName}\nHunger Level: ${petHunger} (0=Full, 10=Very Hungry)\nHappiness Level: ${petHappiness} (0=Sad, 10=Very Happy)`);
+        }
+
+        function feedPet() {
+            if (petHunger > 0) {
+                petHunger--;
+                document.getElementById('hungerLevel').innerText = petHunger;
+                alert("You fed your pet!");
+            } else {
+                alert("Your pet is not hungry.");
+            }
+        }
+
+        function playPet() {
+            if (petHappiness < 10) {
+                petHappiness++;
+                document.getElementById('happinessLevel').innerText = petHappiness;
+                alert("You played with your pet!");
+            } else {
+                alert("Your pet is already very happy.");
+            }
+        }
+
+        function exitGame() {
+            alert("Thank you for playing MonkePet!");
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('game').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
